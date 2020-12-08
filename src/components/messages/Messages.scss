@@ -1,0 +1,26 @@
+.messages {
+  width: 100%;
+  height: 100%;
+  padding: 0rem 1.5rem 1rem 1.5rem;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 4rem;
+  top: 0;
+}
+
+// IPAD
+@media (min-width: 768px) {
+  .messages {
+    padding: 0rem 5rem 1rem 5rem;
+  }
+}
+
+// NOTEBOOK
+@media (min-width: 1024px) {
+  .messages {
+    padding: 0rem 6.5rem 1rem 6.5rem;
+  }
+}
