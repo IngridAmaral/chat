@@ -1,0 +1,51 @@
+.message {
+  text-align: center;
+  width: 100%;
+  color: lighten(rgb(70, 70, 70), 5%);
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: 0.03rem solid lighten(rgb(70, 70, 70), 30%);
+  max-width: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0.5rem 1rem;
+  box-sizing: border-box;
+  letter-spacing: 0.01rem;
+  margin-top: 1rem;
+}
+.user-message {
+  margin-left: auto;
+  background: rgb(229, 229, 140);
+
+  .message-author {
+    display: none;
+  }
+
+  .message-timestamp {
+    text-align: end;
+  }
+}
+
+.received-message {
+  background: white;
+  text-align: start;
+
+  .message-author {
+    display: flex;
+  }
+}
+
+.user-message,
+.received-message {
+  .message-text {
+    box-sizing: border-box;
+    text-align: start;
+  }
+
+  .message-timestamp {
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+    color: lighten(rgb(70, 70, 70), 20%);
+  }
+}
