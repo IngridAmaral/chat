@@ -1,22 +1,15 @@
 import React from 'react';
-import UserMessage from './user-message/UserMessage';
-import ReceivedMessage from './received-message/ReceivedMessage';
+import Message from './message/Message';
 import './Messages.scss';
 
 const Messages = () => (
   <div className="messages">
-    <ReceivedMessage />
-    <UserMessage />
-    <ReceivedMessage />
-    <UserMessage />
-    <ReceivedMessage />
-    <UserMessage />
-    <ReceivedMessage />
-    <UserMessage />
-    <ReceivedMessage />
-    <UserMessage />
-    <ReceivedMessage />
-    <UserMessage />
+    <Message isUser />
+    <Message author="Tom" />
+    <Message author="Tom" />
+    <Message isUser />
+    <Message isUser />
+    <Message author="Tom" />
   </div>
 );
 
