@@ -13,27 +13,6 @@
   letter-spacing: 0.01rem;
   margin-top: 1rem;
 }
-.user-message {
-  margin-left: auto;
-  background: rgb(229, 229, 140);
-
-  .message-author {
-    display: none;
-  }
-
-  .message-timestamp {
-    text-align: end;
-  }
-}
-
-.received-message {
-  background: white;
-  text-align: start;
-
-  .message-author {
-    display: flex;
-  }
-}
 
 .user-message,
 .received-message {
@@ -47,5 +26,19 @@
     padding-top: 0.5rem;
     box-sizing: border-box;
     color: lighten(rgb(70, 70, 70), 20%);
+  }
+}
+
+.received-message {
+  background: white;
+  text-align: start;
+}
+
+.user-message {
+  margin-left: auto;
+  background: rgb(229, 229, 140);
+
+  .message-timestamp {
+    text-align: end;
   }
 }
