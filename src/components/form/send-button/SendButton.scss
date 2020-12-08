@@ -1,0 +1,14 @@
+.send-button {
+  background: rgb(224, 91, 91);
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background: darken(rgb(224, 91, 91), 10%);
+}
