@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es6: true,
+    jest: true
   },
   parser: 'babel-eslint',
   parserOptions: {
@@ -21,7 +22,14 @@ module.exports = {
   plugins: ['jsx-a11y', 'prettier'],
   rules: {
     'import/no-unresolved': 'off',
+    'react/jsx-props-no-spreading': 'off',
     semi: 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }]
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true
+      }
+    ]
   }
 };

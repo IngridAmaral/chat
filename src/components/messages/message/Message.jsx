@@ -4,7 +4,7 @@ import './Message.scss';
 
 const Message = ({ isUser, author, message, timestamp }) => (
   <div className={`message ${isUser ? 'user-message' : 'received-message'}`}>
-    <span className="message-author">{author}</span>
+    {!isUser && <span className="message-author">{author}</span>}
     <span className="message-text">{message}</span>
     <span className="message-timestamp">{timestamp}</span>
   </div>
