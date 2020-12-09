@@ -1,12 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Message from './Message';
+import Message, { convertTimestamp } from './Message';
 
 const defaultProps = {
   isUser: true,
-  author: 'Tom',
-  message: 'Hi',
-  timestamp: 1521096352339
+  messageData: {
+    author: 'Tom',
+    message: 'Hi',
+    timestamp: 1521096352339
+  }
 };
 
 it('renders component', () => {
@@ -16,22 +18,25 @@ it('renders component', () => {
 it('rerenders the correct message', () => {
   const wrapper = shallow(<Message {...defaultProps} />);
 
-  expect(wrapper.find('.message-text').text()).toBe(defaultProps.message);
+  expect(wrapper.find('.message-text').text()).toBe(
+    defaultProps.messageData.message
+  );
 });
 
 it('rerenders the correct timestamp', () => {
   const wrapper = shallow(<Message {...defaultProps} />);
+  const date = convertTimestamp(defaultProps.messageData.timestamp);
 
-  expect(wrapper.find('.message-timestamp').text()).toBe(
-    `${defaultProps.timestamp}`
-  );
+  expect(wrapper.find('.message-timestamp').text()).toBe(`${date}`);
 });
 
 describe('if !isUser', () => {
   it('rerenders the correct author', () => {
     const wrapper = shallow(<Message {...defaultProps} isUser={false} />);
 
-    expect(wrapper.find('.message-author').text()).toBe(defaultProps.author);
+    expect(wrapper.find('.message-author').text()).toBe(
+      defaultProps.messageData.author
+    );
   });
 });
 

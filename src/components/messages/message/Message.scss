@@ -24,6 +24,7 @@
   .message-timestamp {
     padding-right: 0.5rem;
     padding-top: 0.5rem;
+    font-size: 0.8rem;
     box-sizing: border-box;
     color: lighten(rgb(70, 70, 70), 20%);
   }
@@ -32,6 +33,11 @@
 .received-message {
   background: white;
   text-align: start;
+
+  .message-author {
+    padding-bottom: 0.2rem;
+    font-weight: bolder;
+  }
 }
 
 .user-message {

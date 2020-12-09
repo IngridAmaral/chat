@@ -2,27 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Message.scss';
 
-const Message = ({ isUser, author, message, timestamp }) => (
+export const convertTimestamp = (timestamp) => {
+  const date = new Date(timestamp);
+  return date.toUTCString().substring(4, 22);
+};
+
+const Message = ({ isUser, messageData: { author, timestamp, message } }) => (
   <div className={`message ${isUser ? 'user-message' : 'received-message'}`}>
     {!isUser && <span className="message-author">{author}</span>}
     <span className="message-text">{message}</span>
-    <span className="message-timestamp">{timestamp}</span>
+    <span className="message-timestamp">{convertTimestamp(timestamp)}</span>
   </div>
 );
 
 Message.propTypes = {
   isUser: PropTypes.bool,
-  author: PropTypes.string,
-  message: PropTypes.string,
-  timestamp: PropTypes.number
+  messageData: PropTypes.shape({
+    _id: PropTypes.string,
+    message: PropTypes.string,
+    author: PropTypes.string,
+    timestamp: PropTypes.number,
+    token: PropTypes.string
+  }).isRequired
 };
 
 Message.defaultProps = {
-  author: '',
-  isUser: false,
-  message:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  timestamp: 1521096352339
+  isUser: false
 };
 
 export default Message;
