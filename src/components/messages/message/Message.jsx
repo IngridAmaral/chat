@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Message.scss';
 
-const convertTimestamp = (timestamp) => {
+export const convertTimestamp = (timestamp) => {
   const date = new Date(timestamp);
   return date.toUTCString().substring(4, 22);
 };
