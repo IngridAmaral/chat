@@ -1,15 +1,38 @@
 import React from 'react';
 import Messages from './messages/Messages';
 import Form from './form/Form';
-import { sendMessage } from '../api';
+import { sendMessage, fetchMessages } from '../api';
 import './Chat.scss';
 
 const ACTIVE_USER = 'Jessica';
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { newMessage: '', activeUser: ACTIVE_USER };
+    this.state = {
+      messages: [],
+      error: false,
+      newMessage: '',
+      activeUser: ACTIVE_USER
+    };
   }
+
+  componentDidMount = () => {
+    this.receiveMesssages();
+  };
+
+  componentDidUpdate = () => {
+    this.receiveMesssages();
+  };
+
+  receiveMesssages = async () => {
+    const messages = await fetchMessages();
+
+    if (messages === 'Error') {
+      this.setState({ error: true });
+    } else {
+      this.setState({ messages, error: false });
+    }
+  };
 
   handleNewMessage = (e) => {
     const { value } = e.target;
@@ -24,9 +47,11 @@ class Chat extends React.Component {
   };
 
   render() {
+    const { messages, error } = this.state;
+
     return (
       <div className="chat">
-        <Messages activeUser={ACTIVE_USER} />
+        <Messages activeUser={ACTIVE_USER} messages={messages} error={error} />
         <Form
           handleInput={this.handleNewMessage}
           sendMessage={this.sendMessage}
