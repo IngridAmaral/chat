@@ -1,9 +1,11 @@
+@import '../../../styles/styles.scss';
+
 .input-message {
   padding: 1rem;
-  border: solid 0.2rem darken(rgb(74, 129, 230), 15%);
-  border-radius: 0.5rem;
+  border: solid 0.2rem darken($clr-bg-form, 15%);
+  border-radius: $border-radius;
   outline: none;
-  caret-color: darken(rgb(74, 129, 230), 15%);
+  caret-color: darken($clr-bg-form, 15%);
   flex: 1;
   margin-right: 0.5rem;
 }

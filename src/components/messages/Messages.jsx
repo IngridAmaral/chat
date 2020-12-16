@@ -1,39 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Message from './message/Message';
-import { fetchMessages } from '../../api';
 import './Messages.scss';
 
-class Messages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { messages: [] };
+const Messages = ({ activeUser, messages, error }) => {
+  if (error) {
+    return <div>Error!</div>;
   }
 
-  componentDidMount = async () => {
-    const messages = await fetchMessages();
+  return (
+    <div className="messages">
+      {messages.map((messageData) => (
+        <Message
+          isUser={messageData.author === activeUser}
+          messageData={messageData}
+          key={messageData.timestamp}
+        />
+      ))}
+    </div>
+  );
+};
 
-    this.setState({ messages });
-  };
-
-  render() {
-    const { messages } = this.state;
-
-    if (messages.length === 0) {
-      return null;
-    }
-
-    return (
-      <div className="messages">
-        {messages.map((messageData) => (
-          <Message
-            isUser={messageData.author === 'Jessica'}
-            messageData={messageData}
-            key={messageData.timestamp}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+Messages.propTypes = {
+  activeUser: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired,
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      message: PropTypes.string,
+      author: PropTypes.string,
+      timestamp: PropTypes.number,
+      token: PropTypes.string
+    })
+  ).isRequired
+};
 
 export default Messages;

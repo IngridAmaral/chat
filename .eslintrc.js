@@ -21,6 +21,7 @@ module.exports = {
   ],
   plugins: ['jsx-a11y', 'prettier'],
   rules: {
+    'import/no-cycle': 'off',
     'import/no-unresolved': 'off',
     'react/jsx-props-no-spreading': 'off',
     semi: 0,

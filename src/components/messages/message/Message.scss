@@ -1,10 +1,12 @@
+@import '../../../styles/styles.scss';
+
 .message {
   text-align: center;
   width: 100%;
-  color: lighten(rgb(70, 70, 70), 5%);
+  color: lighten($clr-grey, 5%);
   font-weight: 500;
-  border-radius: 0.5rem;
-  border: 0.03rem solid lighten(rgb(70, 70, 70), 30%);
+  border-radius: $border-radius;
+  border: 0.03rem solid lighten($clr-grey, 30%);
   max-width: 65%;
   display: flex;
   flex-direction: column;
@@ -26,7 +28,7 @@
     padding-top: 0.5rem;
     font-size: 0.8rem;
     box-sizing: border-box;
-    color: lighten(rgb(70, 70, 70), 20%);
+    color: lighten($clr-grey, 20%);
   }
 }
 
@@ -42,7 +44,7 @@
 
 .user-message {
   margin-left: auto;
-  background: rgb(229, 229, 140);
+  background: $clr-bg-user-message;
 
   .message-timestamp {
     text-align: end;
