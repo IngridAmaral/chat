@@ -1,4 +1,5 @@
 import React from 'react';
+import he from 'he';
 import PropTypes from 'prop-types';
 import './Message.scss';
 
@@ -10,7 +11,7 @@ export const convertTimestamp = (timestamp) => {
 const Message = ({ isUser, messageData: { author, timestamp, message } }) => (
   <div className={`message ${isUser ? 'user-message' : 'received-message'}`}>
     {!isUser && <span className="message-author">{author}</span>}
-    <span className="message-text">{message}</span>
+    <span className="message-text">{he.decode(message)}</span>
     <span className="message-timestamp">{convertTimestamp(timestamp)}</span>
   </div>
 );
