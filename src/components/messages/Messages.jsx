@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Message from './message/Message';
 import { fetchMessages } from '../../api';
 import './Messages.scss';
@@ -6,27 +7,40 @@ import './Messages.scss';
 class Messages extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [] };
+    this.state = { messages: [], error: false };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.receiveMesssages();
+  };
+
+  componentDidUpdate = () => {
+    this.receiveMesssages();
+  };
+
+  receiveMesssages = async () => {
     const messages = await fetchMessages();
 
-    this.setState({ messages });
+    if (messages === 'Error') {
+      this.setState({ error: true });
+    } else {
+      this.setState({ messages, error: false });
+    }
   };
 
   render() {
-    const { messages } = this.state;
+    const { messages, error } = this.state;
+    const { activeUser } = this.props;
 
-    if (messages.length === 0) {
-      return null;
+    if (error) {
+      return <div>error</div>;
     }
 
     return (
       <div className="messages">
         {messages.map((messageData) => (
           <Message
-            isUser={messageData.author === 'Jessica'}
+            isUser={messageData.author === activeUser}
             messageData={messageData}
             key={messageData.timestamp}
           />
@@ -35,5 +49,9 @@ class Messages extends React.Component {
     );
   }
 }
+
+Messages.propTypes = {
+  activeUser: PropTypes.string.isRequired
+};
 
 export default Messages;
