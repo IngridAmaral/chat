@@ -1,14 +1,16 @@
+@import '../../../styles/styles.scss';
+
 .send-button {
-  background: rgb(224, 91, 91);
+  background: $clr-send-button;
   padding: 1rem;
   color: white;
   font-weight: bold;
   outline: none;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: $border-radius;
   cursor: pointer;
 }
 
 .send-button:hover {
-  background: darken(rgb(224, 91, 91), 10%);
+  background: darken($clr-send-button, 10%);
 }
