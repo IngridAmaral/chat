@@ -2,12 +2,14 @@
 
 .send-button {
   background: $clr-send-button;
-  padding: 1rem;
+  padding: 1.2rem;
+  box-sizing: border-box;
   color: white;
   font-weight: bold;
   outline: none;
   border: none;
   border-radius: $border-radius;
+  height: fit-content;
   cursor: pointer;
 }
 
