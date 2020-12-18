@@ -4,11 +4,6 @@ import Message from './message/Message';
 import './Messages.scss';
 
 class Messages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.mesRef = React.createRef();
-  }
-
   componentDidMount() {
     this.scrollToBottom();
   }
