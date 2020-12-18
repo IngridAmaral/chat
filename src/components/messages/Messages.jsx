@@ -3,23 +3,50 @@ import PropTypes from 'prop-types';
 import Message from './message/Message';
 import './Messages.scss';
 
-const Messages = ({ activeUser, messages, error }) => {
-  if (error) {
-    return <div>Error!</div>;
+class Messages extends React.Component {
+  componentDidMount() {
+    this.scrollToBottom();
   }
 
-  return (
-    <div className="messages">
-      {messages.map((messageData) => (
-        <Message
-          isUser={messageData.author === activeUser}
-          messageData={messageData}
-          key={messageData.timestamp}
+  componentDidUpdate(prevProps) {
+    const { messages } = this.props;
+    const hasNewMessage = messages.length !== prevProps.messages.length;
+
+    if (hasNewMessage) {
+      this.scrollToBottom();
+    }
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: 'instant' });
+  };
+
+  render() {
+    const { activeUser, messages, error } = this.props;
+
+    if (error) {
+      return <div>Error!</div>;
+    }
+
+    return (
+      <div ref={this.mesRef} className="messages" onScroll={this.handleScroll}>
+        {messages.map((messageData) => (
+          <Message
+            isUser={messageData.author === activeUser}
+            messageData={messageData}
+            key={messageData.timestamp}
+          />
+        ))}
+        <div
+          style={{ float: 'left', clear: 'both' }}
+          ref={(el) => {
+            this.messagesEnd = el;
+          }}
         />
-      ))}
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 Messages.propTypes = {
   activeUser: PropTypes.string.isRequired,
@@ -30,7 +57,8 @@ Messages.propTypes = {
       message: PropTypes.string,
       author: PropTypes.string,
       timestamp: PropTypes.number,
-      token: PropTypes.string
+      token: PropTypes.string,
+      length: PropTypes.number
     })
   ).isRequired
 };

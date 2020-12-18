@@ -2,7 +2,7 @@
 
 .message {
   text-align: center;
-  width: 100%;
+  width: fit-content;
   color: lighten($clr-grey, 5%);
   font-weight: 500;
   border-radius: $border-radius;
