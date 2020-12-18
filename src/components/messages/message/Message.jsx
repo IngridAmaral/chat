@@ -1,12 +1,8 @@
 import React from 'react';
 import he from 'he';
 import PropTypes from 'prop-types';
+import convertTimestamp from '../../../utils/convertTimestamp';
 import './Message.scss';
-
-export const convertTimestamp = (timestamp) => {
-  const date = new Date(timestamp);
-  return date.toUTCString().substring(4, 22);
-};
 
 const Message = ({ isUser, messageData: { author, timestamp, message } }) => (
   <div className={`message ${isUser ? 'user-message' : 'received-message'}`}>
