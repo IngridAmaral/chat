@@ -20,10 +20,6 @@ class Chat extends React.Component {
     this.receiveMesssages();
   };
 
-  componentDidUpdate = () => {
-    this.receiveMesssages();
-  };
-
   receiveMesssages = async () => {
     const messages = await fetchMessages();
 
@@ -43,18 +39,48 @@ class Chat extends React.Component {
     const { newMessage, activeUser } = this.state;
     e.preventDefault();
 
-    sendMessage({ message: newMessage, author: activeUser });
+    if (newMessage) {
+      sendMessage({ message: newMessage, author: activeUser });
+    }
+
+    this.addNewMessage();
+  };
+
+  addNewMessage = () => {
+    const { newMessage, activeUser } = this.state;
+    const date = new Date().getTime();
+
+    this.setState((prevState) => ({
+      messages: [
+        ...prevState.messages,
+        {
+          message: newMessage,
+          id: newMessage,
+          timestamp: date,
+          author: activeUser
+        }
+      ],
+      newMessage: ''
+    }));
   };
 
   render() {
-    const { messages, error } = this.state;
+    const { messages, error, newMessage } = this.state;
 
     return (
       <div className="chat">
-        <Messages activeUser={ACTIVE_USER} messages={messages} error={error} />
+        {messages.length && (
+          <Messages
+            newMessage={newMessage}
+            activeUser={ACTIVE_USER}
+            messages={messages}
+            error={error}
+          />
+        )}
         <Form
           handleInput={this.handleNewMessage}
           sendMessage={this.sendMessage}
+          newMessage={newMessage}
         />
       </div>
     );
