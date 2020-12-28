@@ -5,12 +5,16 @@ import { sendMessage, fetchMessages } from '../api';
 import './Chat.scss';
 
 const ACTIVE_USER = 'Jessica';
+export const PENDING = 'PENDING';
+export const FULLFILED = 'FULLFILED';
+export const REJECTED = 'REJECTED';
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      error: false,
+      loading: PENDING,
       newMessage: '',
       activeUser: ACTIVE_USER
     };
@@ -21,12 +25,12 @@ class Chat extends React.Component {
   };
 
   receiveMesssages = async () => {
-    const messages = await fetchMessages();
+    try {
+      const messages = await fetchMessages();
 
-    if (messages === 'Error') {
-      this.setState({ error: true });
-    } else {
-      this.setState({ messages, error: false });
+      this.setState({ messages, loading: FULLFILED });
+    } catch (error) {
+      this.setState({ loading: REJECTED });
     }
   };
 
@@ -41,9 +45,8 @@ class Chat extends React.Component {
 
     if (newMessage) {
       sendMessage({ message: newMessage, author: activeUser });
+      this.addNewMessage();
     }
-
-    this.addNewMessage();
   };
 
   addNewMessage = () => {
@@ -65,16 +68,15 @@ class Chat extends React.Component {
   };
 
   render() {
-    const { messages, error, newMessage } = this.state;
+    const { messages, loading, newMessage } = this.state;
 
     return (
       <div className="chat">
-        {messages.length && (
+        {loading === FULLFILED && (
           <Messages
             newMessage={newMessage}
             activeUser={ACTIVE_USER}
             messages={messages}
-            error={error}
           />
         )}
         <Form
