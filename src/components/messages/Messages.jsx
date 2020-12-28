@@ -26,7 +26,7 @@ class Messages extends React.Component {
 
     return (
       <div ref={this.mesRef} className="messages" onScroll={this.handleScroll}>
-        {messages.map((messageData) => (
+        {messages.splice(46).map((messageData) => (
           <Message
             isUser={messageData.author === activeUser}
             messageData={messageData}
