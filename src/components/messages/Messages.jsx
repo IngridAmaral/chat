@@ -22,11 +22,7 @@ class Messages extends React.Component {
   };
 
   render() {
-    const { activeUser, messages, error } = this.props;
-
-    if (error) {
-      return <div>Error!</div>;
-    }
+    const { activeUser, messages } = this.props;
 
     return (
       <div ref={this.mesRef} className="messages" onScroll={this.handleScroll}>
@@ -38,6 +34,7 @@ class Messages extends React.Component {
           />
         ))}
         <div
+          id="bottom"
           style={{ float: 'left', clear: 'both' }}
           ref={(el) => {
             this.messagesEnd = el;
@@ -50,7 +47,6 @@ class Messages extends React.Component {
 
 Messages.propTypes = {
   activeUser: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
   messages: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,

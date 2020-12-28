@@ -1,14 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Message, { convertTimestamp } from './Message';
+import Message from './Message';
+import convertTimestamp from '../../../utils/convertTimestamp';
+import { message } from './data-test';
 
 const defaultProps = {
   isUser: true,
-  messageData: {
-    author: 'Tom',
-    message: 'Hi',
-    timestamp: 1521096352339
-  }
+  messageData: message
 };
 
 it('renders component', () => {
